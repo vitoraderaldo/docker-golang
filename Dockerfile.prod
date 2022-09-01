@@ -1,0 +1,14 @@
+# Build image
+FROM golang:1.19.0-alpine3.16 AS builder
+
+WORKDIR /app
+
+COPY ./src .
+RUN rm -rf build
+RUN go build -o build/
+
+# Use another container to run the image
+FROM scratch
+WORKDIR /app
+COPY --from=builder /app/build/hello .
+ENTRYPOINT ["./hello"]

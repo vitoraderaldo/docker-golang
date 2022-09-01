@@ -1,0 +1,9 @@
+version: "3"
+services:
+  golang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vitor96k/golang-hello-world
+    volumes:
+      - ./src:/app
